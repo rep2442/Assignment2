@@ -1,0 +1,34 @@
+% Author Name: Olivia Repko
+% Email: repkoo96@rowan.edu
+% Course: MATLAB Programming - Fall 2024
+% Assignment: Assignment 2
+% Task: Weather
+% Date: 10/18/24
+
+% Read data from file
+data = readcell('weather_data.txt', 'Delimiter', ',');
+
+% Extract numerical data (skipping header row)
+temperature = cell2mat(data(2:end, 2)); % Column for Temperature
+humidity = cell2mat(data(2:end, 3));    % Column for Humidity
+precipitation = cell2mat(data(2:end, 4)); % Column for Precipitation
+
+% Calculate averages and total
+average_temperature = mean(temperature);
+average_humidity = mean(humidity);
+total_precipitation = sum(precipitation);
+
+% Prepare summary statistics
+summary = {
+    'Average Temperature', average_temperature;
+    'Average Humidity', average_humidity;
+    'Total Precipitation', total_precipitation
+};
+
+% Save the summary statistics to a new file
+writetable(cell2table(summary), 'weather_summary.txt', 'WriteVariableNames', false);
+
+% Display the statistics 
+fprintf('Average Temperature: %.2f\n', average_temperature);
+fprintf('Average Humidity: %.2f\n', average_humidity);
+fprintf('Total Precipitation: %.2f\n', total_precipitation);
