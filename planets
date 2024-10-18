@@ -1,0 +1,49 @@
+% Author Name: Olivia Repko
+% Email: repkoo96@rowan.edu
+% Course: MATLAB Programming - Fall 2024
+% Assignment: Assignment 2
+% Task: Planets
+% Date: 10/18/24
+
+
+% Step A: Define planet distances and sizes
+planet_names = {'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'};
+planet_distances = [0.39, 0.72, 1.00, 1.52, 5.20, 9.58, 19.22, 30.07]; % AU
+planet_sizes = [0.38, 0.95, 1.00, 0.53, 11.21, 9.45, 4.01, 3.88]; 
+
+% Step B: Create the figure with subplots
+figure;
+
+
+
+% First subplot: Scatter plot of planet distances vs. planet sizes
+subplot(2, 1, 1);
+scatter(planet_distances, planet_sizes * 10, 100 * planet_sizes, 'filled'); 
+title('Planet Distances vs. Sizes');
+xlabel('Distance from Sun (AU)');
+ylabel('Relative Size (scaled)');
+grid on;
+xticks(planet_distances);
+yticks(0:1:12); % Scale for visualization
+set(gca, 'YLim', [0 12]);
+hold on;
+
+% Add planet names as labels
+for i = 1:length(planet_names)
+    text(planet_distances(i), planet_sizes(i) * 10, planet_names{i}, 'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'right');
+end
+
+
+
+% Legend
+legend(planet_names, 'Location', 'bestoutside');
+% Second subplot: Bar chart of planet distances
+subplot(2, 1, 2);
+bar(planet_distances, 'FaceColor', [0.2, 0.6, 0.8]);
+title('Planet Distances from the Sun');
+xlabel('Planets');
+ylabel('Distance (AU)');
+set(gca, 'XTickLabel', planet_names);
+grid on;
+% Step D: Save the figure as an image file
+saveas(gcf, 'solar_system_visualization.png');
